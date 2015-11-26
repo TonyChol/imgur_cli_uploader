@@ -3,6 +3,7 @@
     This is the authenticate module for imgur using ImgurClient.
 '''
 import base64
+import os
 from imgurpython import ImgurClient
 from helpers import get_input, get_config
 
@@ -64,12 +65,9 @@ def authenticate():
 
 if __name__ == '__main__':
     client = authenticate()
-    print client
     images = client.get_account_images('me')
     print "Current # of images: {0}".format(len(images))
 
-    # path = '~/Dropbox/5.Personal/Photos/avatars/cityU.jpg'
-    # fd = open(path, 'rb')
-    # contents = fd.read()
-    # b64 = base64.b64encode(contents)
-    # print type(b64)
+    path = '/Users/TonyChol/Dropbox/5.Personal/Photos/avatars/cityU.jpg'
+    response = client.upload_from_path(path, anon=False)
+    print response['link']
