@@ -16,6 +16,7 @@ def display_result_urls(res_url_list):
     if len(res_url_list) <= 1:
         print "The url is copied into the clipboard."
         print "The result url is:"
+        print res_url_list[0]
     else:
         print "The urls are copied into the clipboard."
         print "The result urls are:"
