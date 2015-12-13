@@ -6,6 +6,13 @@ from auth import authenticate
 
 
 def display_result_urls(res_url_list):
+    """
+    Helper function to display the result.
+
+     :arg:
+        res_url_list: A list for the result url(s)
+    :rtype: None
+    """
     if len(res_url_list) <= 1:
         print "The url is copied into the clipboard."
         print "The result url is:"
@@ -15,7 +22,14 @@ def display_result_urls(res_url_list):
         for res_url in res_url_list:
             print res_url
 
+
 def main(argv):
+    """
+    :arg:
+        argv: The argument list which we **chop it off**
+              and pass the rest of the list
+    :rtype: None
+    """
     try:
         # ops is the parsed options, args is the remaining argumentss
         ops, args = getopt.getopt(argv, "hcod", ["help", "copy", "open"])
@@ -30,6 +44,7 @@ def main(argv):
     client = authenticate()
     current_path = os.getcwd()
     res_url_list = []
+    print "Uploading images..."
     for file_name in args:
         file_path = current_path + "/{0}".format(file_name)
         response = client.upload_from_path(file_path, anon=False)
@@ -49,6 +64,7 @@ def main(argv):
             import webbrowser as wb
             for res_url in res_url_list:
                 wb.open_new_tab(res_url)
+
     display_result_urls(res_url_list)
 
 if __name__ == '__main__':
