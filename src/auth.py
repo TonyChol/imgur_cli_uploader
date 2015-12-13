@@ -43,8 +43,6 @@ def authenticate():
             config.write(configfile)
 
     if refresh_token and not access_token:
-        # print 'refresh token but not access token'
-        # print 'refresh token: {0}'.format(refresh_token)
         client.set_user_auth(access_token, refresh_token)
         # client = ImgurClient(client_id, client_secret, refresh_token)
         if not client.auth:
