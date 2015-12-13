@@ -25,7 +25,7 @@ At the first time, you need to login to authenticate this upload program.
 
 1. At first, the cli-interface will ask you to log in your imgur account: 
 
-![](http://i.imgur.com/yreYoC3.png)
+![](http://i.imgur.com/iThA8Gy.png)
 
 At the same time, your browser will pop up and an imgur OAuth url is opened.
 
