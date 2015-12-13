@@ -1,12 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-'''
-    This is the authenticate module for imgur using ImgurClient.
-'''
 import base64
 import os
 from imgurpython import ImgurClient
 from helpers import get_input, get_config
+
 
 def authenticate():
     """
@@ -28,7 +26,10 @@ def authenticate():
     if not refresh_token:
         # print 'not refresh token'
         authorization_url = client.get_auth_url('pin')
-        # print("Go to the following URL: {0}".format(authorization_url))
+        import webbrowser as wb
+        print("First we need to have your authentication access...")
+        print("Go to browser and open the following URL: {0}".format(authorization_url))
+        wb.open_new_tab(authorization_url)
 
         pin = get_input("Enter the pin code: ")
 
@@ -46,17 +47,19 @@ def authenticate():
         client.set_user_auth(access_token, refresh_token)
         # client = ImgurClient(client_id, client_secret, refresh_token)
         if not client.auth:
-            print 'no auth!!!'
-        if client.auth:
-            print "there is a client.auth"
+            print("Auth failed... Please try again")
+            import sys
+            sys.exit()
+        else:
+            print("Auth success! Getting accessing...")
             client.auth.refresh()
             new_access_token = client.auth.current_access_token
-            print 'new access token: {0}'.format(new_access_token)
+            print("New access token generated.")
             config.set('credentials', 'access_token', value=new_access_token)
-            print 'writing access token'
             with open(auth_path, 'wb') as configfile:
                 config.write(configfile)
             access_token = new_access_token
+            print("Access information saved!")
 
     if refresh_token and access_token:
         # print 'refresh token and access token'
