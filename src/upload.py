@@ -18,8 +18,23 @@ def display_result_urls(res_url_list):
         print res_url_list[0]
     else:
         print "The result urls are:"
-        for res_url in res_url_list:
-            print res_url
+        for url in res_url_list:
+            print url
+
+def display_markdown_urls(res_url_list):
+    """
+    Helper function to display the result
+    urls in markdown formatted.
+    :param res_url_list:
+    :return: None
+    """
+    if len(res_url_list) <= 1:
+        print "The result url is:"
+        print("![]({0})".format(res_url_list[0]))
+    else: # len() = 2 or more
+        print "The result urls are:"
+        for url in res_url_list:
+            print("![]({0})".format(url))
 
 
 def main(argv):
@@ -31,7 +46,7 @@ def main(argv):
     """
     try:
         # ops is the parsed options, args is the remaining argumentss
-        ops, args = getopt.getopt(argv, "hcod", ["help", "copy", "open"])
+        ops, args = getopt.getopt(argv, "hcodm", ["help", "copy", "open","markdown"])
     except getopt.GetoptError:
         print "Arguments Error"
         sys.exit(2)
@@ -40,6 +55,7 @@ def main(argv):
         print "Please specify your images to upload."
         sys.exit()
 
+    markdown_flag = False
     client = authenticate()
     current_path = os.getcwd()
     res_url_list = []
@@ -55,16 +71,26 @@ def main(argv):
             sys.exit()
         elif opt == "-d":
             print "The client is currently in Debug mode"
+        elif opt in ("-m", "--markdown"):
+            markdown_flag = True
         elif opt in ("-c", "--copy"):
             import pyperclip as pc
-            text_to_copy = " ".join(res_url_list)
+            if markdown_flag:
+                markdown_list = map(lambda x: "![](" + x + ")", res_url_list)
+                text_to_copy = " ".join(markdown_list)
+            else:
+                text_to_copy = " ".join(res_url_list)
             pc.copy(text_to_copy)
+            print("The result url(s) is copied!")
         elif opt in ("-o", "--open"):
             import webbrowser as wb
             for res_url in res_url_list:
                 wb.open_new_tab(res_url)
 
-    display_result_urls(res_url_list)
+    if markdown_flag:
+        display_markdown_urls(res_url_list)
+    else:
+        display_result_urls(res_url_list)
 
 if __name__ == '__main__':
     main(sys.argv[1:])
