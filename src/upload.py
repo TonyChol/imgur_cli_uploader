@@ -21,6 +21,7 @@ def display_result_urls(res_url_list):
         for url in res_url_list:
             print url
 
+
 def display_markdown_urls(res_url_list):
     """
     Helper function to display the result

@@ -42,7 +42,8 @@ Copy and paste the PIN in the page to the command line program and you will succ
 2. Arguments
 	3. ```upload -c your_image.jpg image_2.png```: Upload your image(s) to your imgur account and **copy** the corresponding imgur url(s) into your clipboard.
 	4. ```upload -o your_image.jpg```: Upload your image(s) to your imgur account and **open** the corresponding url(s) on your browser.
+	5. ```upload -m your_image.jpg```: Convert your result url(s) of images into markdown syntax.
 	
 ##Problem
-1. Upload speed seems kind of slow. It need to be fixed soon.
+1. - [x]Upload speed seems kind of slow. It need to be fixed soon.
 

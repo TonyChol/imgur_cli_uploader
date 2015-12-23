@@ -22,9 +22,9 @@ def authenticate():
     refresh_token = config.get('credentials', 'refresh_token')
     access_token = config.get('credentials', 'access_token')
 
-    client = ImgurClient(client_id, client_secret)
     if not refresh_token:
         # print 'not refresh token'
+        client = ImgurClient(client_id, client_secret)
         authorization_url = client.get_auth_url('pin')
         import webbrowser as wb
         print("First we need to have your authentication access...")
