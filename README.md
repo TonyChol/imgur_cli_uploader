@@ -45,5 +45,5 @@ Copy and paste the PIN in the page to the command line program and you will succ
 	5. ```upload -m your_image.jpg```: Convert your result url(s) of images into markdown syntax.
 	
 ##Problem
-1. - [x]Upload speed seems kind of slow. It need to be fixed soon.
+- [x] Upload speed seems kind of slow. It need to be fixed soon.
 
